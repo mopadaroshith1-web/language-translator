@@ -1,0 +1,272 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #eaf2ff, #f7f9ff);
+    color: #172033;
+    padding: 40px 20px;
+}
+
+.app {
+    width: 100%;
+    max-width: 950px;
+    margin: auto;
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 35px;
+    box-shadow: 0 15px 45px rgba(40, 70, 120, 0.15);
+}
+
+/* Header */
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-bottom: 35px;
+}
+
+.logo {
+    font-size: 48px;
+}
+
+.header h1 {
+    font-size: 36px;
+    margin-bottom: 6px;
+}
+
+.header p {
+    color: #667085;
+    font-size: 16px;
+}
+
+
+/* Language Selection */
+
+.language-section {
+    display: flex;
+    align-items: end;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.language-box {
+    flex: 1;
+}
+
+.language-box label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #344054;
+}
+
+.language-box select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #d0d5dd;
+    border-radius: 12px;
+    font-size: 16px;
+    background: white;
+    cursor: pointer;
+    outline: none;
+}
+
+.language-box select:focus {
+    border-color: #2563eb;
+}
+
+
+/* Swap Button */
+
+.swap-btn {
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 50%;
+    background: #eef4ff;
+    color: #2563eb;
+    font-size: 25px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.swap-btn:hover {
+    background: #2563eb;
+    color: white;
+    transform: rotate(180deg);
+}
+
+
+/* Text Cards */
+
+.text-card {
+    border: 1px solid #d9e1ee;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #ffffff;
+    margin-bottom: 20px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px;
+    background: #f8faff;
+    border-bottom: 1px solid #e4e9f2;
+    font-weight: bold;
+}
+
+#charCount {
+    font-size: 13px;
+    color: #667085;
+    font-weight: normal;
+}
+
+textarea {
+    width: 100%;
+    min-height: 220px;
+    border: none;
+    resize: vertical;
+    padding: 20px;
+    font-size: 18px;
+    font-family: inherit;
+    outline: none;
+    color: #172033;
+}
+
+textarea::placeholder {
+    color: #98a2b3;
+}
+
+
+/* Translate Button */
+
+.translate-btn {
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    padding: 16px;
+    background: #2563eb;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 25px;
+    transition: 0.2s;
+}
+
+.translate-btn:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+.translate-btn:active {
+    transform: translateY(0);
+}
+
+
+/* Translation Result */
+
+.result-card {
+    min-height: 220px;
+}
+
+.result-text {
+    min-height: 160px;
+    padding: 20px;
+    font-size: 18px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    color: #344054;
+}
+
+
+/* Action Buttons */
+
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 5px;
+}
+
+.action-btn {
+    border: 1px solid #d0d5dd;
+    background: white;
+    color: #344054;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.action-btn:hover {
+    background: #f2f4f7;
+    border-color: #98a2b3;
+}
+
+
+/* Footer */
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    color: #667085;
+    font-size: 14px;
+}
+
+footer span {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 650px) {
+
+    body {
+        padding: 15px;
+    }
+
+    .app {
+        padding: 22px;
+        border-radius: 18px;
+    }
+
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .header h1 {
+        font-size: 28px;
+    }
+
+    .language-section {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .swap-btn {
+        align-self: center;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .action-btn {
+        width: 100%;
+    }
+}
