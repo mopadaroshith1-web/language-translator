@@ -3,8 +3,6 @@
 // ==========================================
 
 const express = require("express");
-const path = require("path");
-
 
 // ==========================================
 // CREATE EXPRESS APP
@@ -12,149 +10,81 @@ const path = require("path");
 
 const app = express();
 
-
-// Server port
+// Render provides PORT automatically.
+// 3000 is used when running locally.
 const PORT = process.env.PORT || 3000;
-
 
 // ==========================================
 // MIDDLEWARE
 // ==========================================
 
-// Allow JSON data from frontend
 app.use(express.json());
 
-// Serve HTML, CSS and JavaScript files
+// Serve index.html, style.css and script.js
 app.use(express.static(__dirname));
-
 
 // ==========================================
 // TRANSLATION API
 // ==========================================
 
 app.post("/api/translate", async (req, res) => {
-
     try {
-
-        // Get data sent from script.js
+        // Get data from frontend
         const { text, source, target } = req.body;
 
-
-        // Check input
+        // Validate input
         if (!text || !source || !target) {
-
             return res.status(400).json({
                 error: "Text, source language and target language are required."
             });
-
         }
 
-
-        // ======================================
-        // MYMEMORY TRANSLATION API
-        // ======================================
-
+        // MyMemory Translation API
         const url =
             "https://api.mymemory.translated.net/get" +
             "?q=" + encodeURIComponent(text) +
             "&langpair=" + encodeURIComponent(source + "|" + target);
 
-
-        // Send request to MyMemory
+        // Request translation
         const response = await fetch(url);
 
-
-        // Check response
         if (!response.ok) {
-
-            throw new Error(
-                "Translation API request failed."
-            );
-
+            throw new Error("Translation API request failed.");
         }
-
 
         // Convert response to JSON
         const data = await response.json();
 
-
-        // Check translation
+        // Check translation result
         if (
             !data.responseData ||
             !data.responseData.translatedText
         ) {
-
-            throw new Error(
-                "Translation was not returned."
-            );
-
+            throw new Error("Translation was not returned.");
         }
 
-
-        // ======================================
-        // SEND TRANSLATION TO FRONTEND
-        // ======================================
-
+        // Send translation to frontend
         res.json({
-            translatedText:
-                data.responseData.translatedText
+            translatedText: data.responseData.translatedText
         });
-
 
     } catch (error) {
-
-        console.error(
-            "Translation error:",
-            error
-        );
-
+        console.error("Translation error:", error);
 
         res.status(500).json({
-
-            error:
-                "Translation failed. Please try again."
-
+            error: "Translation failed. Please try again."
         });
-
     }
-
 });
-
 
 // ==========================================
 // START SERVER
 // ==========================================
 
-// 0.0.0.0 allows other devices on the
-// same Wi-Fi network to access the server.
-
-app.listen(PORT, "0.0.0.0", (error) => {
-
-    if (error) {
-
-        console.error(
-            "Server failed to start:",
-            error
-        );
-
-        return;
-    }
-
-
-    console.log("");
+app.listen(PORT, "0.0.0.0", () => {
     console.log("==========================================");
     console.log("     LANGUAGE TRANSLATOR SERVER");
     console.log("==========================================");
-    console.log("");
-    console.log("Server started successfully!");
-    console.log("");
-    console.log("This computer:");
-    console.log("http://localhost:3000");
-    console.log("");
-    console.log("For devices on the same Wi-Fi:");
-    console.log(`http://${require('os').networkInterfaces().en0[0].address}:3000`);
-    console.log("");
+    console.log(`Server running on port ${PORT}`);
     console.log("==========================================");
-    console.log("");
-
 });
