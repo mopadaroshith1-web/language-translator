@@ -14,7 +14,7 @@ const app = express();
 
 
 // Server port
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 
 // ==========================================
@@ -152,7 +152,7 @@ app.listen(PORT, "0.0.0.0", (error) => {
     console.log("http://localhost:3000");
     console.log("");
     console.log("For devices on the same Wi-Fi:");
-    console.log("http://192.168.0.103:3000");
+    console.log(`http://${require('os').networkInterfaces().en0[0].address}:3000`);
     console.log("");
     console.log("==========================================");
     console.log("");
